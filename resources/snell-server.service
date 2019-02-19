@@ -1,0 +1,13 @@
+[Unit]
+Description=Snell Default Server Service
+After=network.target
+
+[Service]
+Type=simple
+User=nobody
+Group=nogroup
+LimitNOFILE=32768
+ExecStart=/usr/bin/snell-server -c /etc/snell-server.conf
+
+[Install]
+WantedBy=multi-user.target

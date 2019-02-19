@@ -1,0 +1,4 @@
+[snell-server]
+listen = 0.0.0.0:3306
+psk = YGUhkNkjn7twq24fd
+obfs = http

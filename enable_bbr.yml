@@ -1,0 +1,23 @@
+---
+- name: Enable BBR
+  hosts: tunnels
+  become: true
+
+  tasks:
+  - name: Download BBR enabler
+    get_url:
+      url:  https://github.com/teddysun/across/raw/master/bbr.sh
+      mode: 755
+      dest: /tmp
+
+
+  - name: Install pexpect
+    apt:
+      name: python-pexpect
+    become: yes
+
+  - name: Enable BBR
+    expect:
+      command: /tmp/bbr.sh
+      responses:
+        start: '\r'

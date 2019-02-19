@@ -1,0 +1,4 @@
+[tunnels]
+kr ansible_ssh_host=1.2.3.4 ansible_ssh_port=22 ansible_ssh_user=wtf
+hk ansible_ssh_host=2.3.4.5 ansible_ssh_port=22 ansible_ssh_user=wtf
+sg ansible_ssh_host=3.4.5.6 ansible_ssh_port=22 ansible_ssh_user=wtf

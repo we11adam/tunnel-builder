@@ -1,0 +1,48 @@
+---
+- name: Install BBR/Shadowsocks-libev/Snell-server services
+  hosts: tunnels
+  become: true
+
+  tasks:
+
+  - name: Install shadowsocks-libev package
+    apt:
+      name: shadowsocks-libev
+      state: present
+
+  - name: Install shadowsocks-libev config
+    copy:
+      src: resources/shadowsocks-libev.conf
+      dest: /etc/shadowsocks-libev/config.json
+      force: yes
+
+  - name: Start shadowsocks-libev
+    service:
+      name: shadowsocks-libev
+      state: started
+
+  - name: Install snell server binary
+    unarchive:
+      remote_src: yes
+      src: https://github.com/surge-networks/snell/releases/download/1.0.1/snell-server-v1.0.1-linux-amd64.zip
+      dest: /usr/bin/
+
+  - name: Install snell server config
+    copy:
+      src: resources/snell-server.conf
+      dest: /etc/snell-server.conf
+
+  - name: Install snell server service
+    copy:
+      src: resources/snell-server.service
+      dest: /lib/systemd/system/snell-server.service
+
+  - name: Enable snell server service
+    systemd:
+      name: snell-server
+      state: started
+      enabled: yes
+      daemon_reload: yes
+
+
+

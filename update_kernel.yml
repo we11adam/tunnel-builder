@@ -1,0 +1,21 @@
+---
+- name: Update kernel
+  hosts: tunnels
+  become: true
+
+  tasks:
+  - name: Update packages
+    apt:
+      update_cache: true
+      upgrade: yes
+
+  - name : Install hwe-kernel
+    apt:
+      name: linux-image-generic-hwe-18.04
+      state: present
+
+  - name : Update grub config
+    command: update-grub
+
+  - name: Unconditionally reboot the machine with all defaults
+    reboot:
